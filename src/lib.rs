@@ -2,8 +2,12 @@ use std::process::Command;
 
 pub struct GitDataInjector{}
 impl GitDataInjector{
-    pub fn with_last_commit_revision_hash(self) -> Self{
 
+    pub fn new() -> Self{
+        GitDataInjector{}
+    }
+
+    pub fn with_last_commit_revision_hash(self) -> Self{
         let output = Command::new("git")
         .args(&["rev-parse", "--short", "HEAD"])
         .output()
