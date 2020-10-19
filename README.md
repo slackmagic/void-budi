@@ -16,10 +16,22 @@ Add this code to your _build.rs_ file (if not present create it on your project 
 use void_budi::*;
 fn main() {
     GitDataInjector::new()
+    .with_last_commit_revision_hash()
     .with_last_commit_revision_short_hash()
     .with_last_commit_message()
     .with_last_commit_date();
 }
 ```
 
+Into your code :
 
+```
+use std::env;
+
+fn main() {
+    println!("{:?}", env!("GIT_HASH"));
+    println!("{:?}", env!("GIT_SHORT_HASH"));
+    println!("{:?}", env!("GIT_MESSAGE"));
+    println!("{:?}", env!("GIT_DATE"));
+}
+```
