@@ -15,9 +15,11 @@ Add this code to your _build.rs_ file (if not present create it on your project 
 ```
 use void_budi::*;
 fn main() {
-    println!("Hello, world!");
+    GitDataInjector::new()
+    .with_last_commit_revision_short_hash()
+    .with_last_commit_message()
+    .with_last_commit_date();
 }
-
 ```
 
 

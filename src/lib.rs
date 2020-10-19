@@ -7,9 +7,21 @@ impl GitDataInjector{
         GitDataInjector{}
     }
 
-    pub fn with_last_commit_revision_hash(self) -> Self{
+    pub fn with_last_commit_short_revision_hash(self) -> Self{
         let output = Command::new("git")
         .args(&["rev-parse", "--short", "HEAD"])
+        .output()
+        .expect("DataInjector error: impossible to retrieve GIT last commit short revision hash.");
+
+        let git_hash = String::from_utf8(output.stdout).unwrap();
+        println!("cargo:rustc-env=GIT_SHORT_HASH={}", git_hash);
+
+        self
+    }
+
+    pub fn with_last_commit_revision_hash(self) -> Self{
+        let output = Command::new("git")
+        .args(&["rev-parse", "HEAD"])
         .output()
         .expect("DataInjector error: impossible to retrieve GIT last commit revision hash.");
 
