@@ -1,7 +1,7 @@
 [package]
 name = "void-budi"
 description = "Build Data Injector"
-version = "1.1.0"
+version = "1.2.0"
 authors = ["SlackMagiC <laurent.pietrzyk@gmail.com>"]
 edition = "2018"
 
@@ -11,3 +11,4 @@ edition = "2018"
 name = "void_budi"
 
 [dependencies]
+simian-council-lib = {git = "https://github.com/slackmagic/simian-council-lib", branch = "master"}

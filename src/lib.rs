@@ -1,12 +1,20 @@
+use simian_council_lib;
 use std::process::Command;
 
-pub struct GitDataInjector {}
-impl GitDataInjector {
+pub struct BuildDataInjector {}
+impl BuildDataInjector {
     pub fn new() -> Self {
-        GitDataInjector {}
+        BuildDataInjector {}
     }
 
-    pub fn with_last_commit_short_revision_hash(self) -> Self {
+    pub fn with_random_pokemon_name(self) -> Self {
+        let pokemon_name = simian_council_lib::ask_for_a_pokemon_with_adjective();
+        println!("cargo:rustc-env=POKEMON_NAME={}", pokemon_name);
+
+        self
+    }
+
+    pub fn with_git_last_commit_short_revision_hash(self) -> Self {
         let output = Command::new("git")
             .args(&["rev-parse", "--short", "HEAD"])
             .output()
@@ -20,7 +28,7 @@ impl GitDataInjector {
         self
     }
 
-    pub fn with_last_commit_revision_hash(self) -> Self {
+    pub fn with_git_last_commit_revision_hash(self) -> Self {
         let output = Command::new("git")
             .args(&["rev-parse", "HEAD"])
             .output()
@@ -32,7 +40,7 @@ impl GitDataInjector {
         self
     }
 
-    pub fn with_last_commit_message(self) -> Self {
+    pub fn with_git_last_commit_message(self) -> Self {
         let output = Command::new("git")
             .args(&["log", "-1", "--pretty=format:%B"])
             .output()
@@ -44,7 +52,7 @@ impl GitDataInjector {
         self
     }
 
-    pub fn with_last_commit_date(self) -> Self {
+    pub fn with_git_last_commit_date(self) -> Self {
         let output = Command::new("git")
             .args(&["log", "-1", "--pretty=format:%cd"])
             .output()
