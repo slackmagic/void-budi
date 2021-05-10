@@ -7,9 +7,9 @@ impl BuildDataInjector {
         BuildDataInjector {}
     }
 
-    pub fn with_random_pokemon_name(self) -> Self {
-        let pokemon_name = simian_council_lib::ask_for_a_pokemon_with_adjective();
-        println!("cargo:rustc-env=POKEMON_NAME={}", pokemon_name);
+    pub fn with_version_name(self) -> Self {
+        let version_name = simian_council_lib::ask_for_a_pokemon_with_adjective();
+        println!("cargo:rustc-env=VERSION_NAME={}", version_name);
 
         self
     }
